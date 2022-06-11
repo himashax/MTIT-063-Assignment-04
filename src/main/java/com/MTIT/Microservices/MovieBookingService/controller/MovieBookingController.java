@@ -15,7 +15,7 @@ import java.util.List;
 public class MovieBookingController{
 
     @Autowired
-    MovieBookingService bookingService;
+    private MovieBookingService bookingService;
 
     @GetMapping("/bookedmovies")
     public List<MovieBooking> getALlBookedMovies() {

@@ -13,7 +13,7 @@ import java.util.List;
 public class MovieBookingService {
 
     @Autowired
-   MovieBookingRepository movieBookingRepository;
+    private MovieBookingRepository movieBookingRepository;
 
     public List<MovieBooking> listBookedMovies() {
         return movieBookingRepository.findAll();
