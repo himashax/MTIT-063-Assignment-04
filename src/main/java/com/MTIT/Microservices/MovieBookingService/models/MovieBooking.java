@@ -1,5 +1,11 @@
 package com.MTIT.Microservices.MovieBookingService.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class MovieBooking {
 
     private int bookingId;
@@ -24,6 +30,8 @@ public class MovieBooking {
         this.bookingId = bookingId;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getCustomerId() {
         return customerId;
     }
