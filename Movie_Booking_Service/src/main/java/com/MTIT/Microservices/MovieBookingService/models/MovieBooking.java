@@ -15,11 +15,11 @@ public class MovieBooking {
     private int movieHallId;
 
     @Column
-    private int noOfSeats;
+    private long noOfSeats;
 
     public MovieBooking(){}
 
-    public MovieBooking(int bookingId, int customerId, int movieId, int movieHallId, int noOfSeats) {
+    public MovieBooking(int bookingId, int customerId, int movieId, int movieHallId, long noOfSeats) {
         this.bookingId = bookingId;
         this.customerId = customerId;
         this.movieId = movieId;
@@ -61,11 +61,11 @@ public class MovieBooking {
         this.movieHallId = movieHallId;
     }
 
-    public int getNoOfSeats() {
+    public long getNoOfSeats() {
         return noOfSeats;
     }
 
-    public void setNoOfSeats(int noOfSeats) {
+    public void setNoOfSeats(long noOfSeats) {
         this.noOfSeats = noOfSeats;
     }
 

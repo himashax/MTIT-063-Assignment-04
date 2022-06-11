@@ -31,6 +31,25 @@ public class MovieBoookingServiceImpl implements MovieBookingService {
         // Returns booking details by the booking id
         return movieBookingRepository.findById(movieBookingId).get();
     }
+
+    public String updateBooking(MovieBooking booking, Integer bookingId){
+        // Get if there is an existing booking details for the requested booking id
+        MovieBooking getExistingBooking = getBookedMovieDetails(bookingId);
+
+        // Check if the booking id of the updated details is corresponding to the requested booking id
+        if(getExistingBooking.getBookingId() == booking.getBookingId()){
+            // Allow user to update if the ids are matching
+            bookMovie(booking);
+
+            // Returns the updated movie details
+            return booking.toString() + "Updated Successfully";
+        }
+        else{
+            return "Selected Booking does not exist";
+        }
+    }
+
+
     @Override
     public void deleteBooking(Integer movieBookingId) {
         // Delete the booking details by giving the booking id
