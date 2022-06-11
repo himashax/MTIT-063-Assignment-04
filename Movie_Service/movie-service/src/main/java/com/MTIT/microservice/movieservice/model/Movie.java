@@ -10,17 +10,17 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name="movie")
+@Table(name = "movie")
 public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long movieId;
 
-    @Column(name = "title")
+    @Column(name = "movieTitle")
     private String movieTitle;
 
-    @Column(name = "type")
+    @Column(name = "movieType")
     private String movieType;
 
     @Column(name = "year")
