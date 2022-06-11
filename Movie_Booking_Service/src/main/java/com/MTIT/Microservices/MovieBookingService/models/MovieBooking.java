@@ -1,6 +1,7 @@
 package com.MTIT.Microservices.MovieBookingService.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class MovieBooking {
@@ -13,13 +14,17 @@ public class MovieBooking {
     @Column
     private int movieHallId;
 
+    @Column
+    private int noOfSeats;
+
     public MovieBooking(){}
 
-    public MovieBooking(int bookingId, int customerId, int movieId, int movieHallId) {
+    public MovieBooking(int bookingId, int customerId, int movieId, int movieHallId, int noOfSeats) {
         this.bookingId = bookingId;
         this.customerId = customerId;
         this.movieId = movieId;
         this.movieHallId = movieHallId;
+        this.noOfSeats = noOfSeats;
     }
 
     @Id
@@ -56,6 +61,14 @@ public class MovieBooking {
         this.movieHallId = movieHallId;
     }
 
+    public int getNoOfSeats() {
+        return noOfSeats;
+    }
+
+    public void setNoOfSeats(int noOfSeats) {
+        this.noOfSeats = noOfSeats;
+    }
+
     @Override
     public String toString() {
         return "MovieBooking{" +
@@ -63,6 +76,7 @@ public class MovieBooking {
                 ", customerId=" + customerId +
                 ", movieId=" + movieId +
                 ", movieHallId=" + movieHallId +
+                ", noOfSeats=" + noOfSeats +
                 '}';
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class MovieBookingServiceApplication {
 
+	// Creating RestTemplate object for consuming API calls using the single design pattern
 	@Bean
 	public RestTemplate getRestTemplate(){
 		return new RestTemplate();
