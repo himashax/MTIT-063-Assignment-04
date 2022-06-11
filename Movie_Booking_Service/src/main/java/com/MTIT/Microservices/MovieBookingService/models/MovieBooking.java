@@ -13,6 +13,7 @@ public class MovieBooking {
     private int movieId;
     private int movieHallId;
 
+    private int age;
     public MovieBooking(){}
 
     public MovieBooking(int bookingId, int customerId, int movieId, int movieHallId) {
