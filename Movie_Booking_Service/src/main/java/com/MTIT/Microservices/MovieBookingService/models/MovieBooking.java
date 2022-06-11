@@ -1,16 +1,16 @@
 package com.MTIT.Microservices.MovieBookingService.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class MovieBooking {
-
+    @Column
     private int bookingId;
+    @Column
     private int customerId;
+    @Column
     private int movieId;
+    @Column
     private int movieHallId;
 
     public MovieBooking(){}
@@ -22,6 +22,8 @@ public class MovieBooking {
         this.movieHallId = movieHallId;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getBookingId() {
         return bookingId;
     }
@@ -30,8 +32,6 @@ public class MovieBooking {
         this.bookingId = bookingId;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getCustomerId() {
         return customerId;
     }
@@ -54,5 +54,15 @@ public class MovieBooking {
 
     public void setMovieHallId(int movieHallId) {
         this.movieHallId = movieHallId;
+    }
+
+    @Override
+    public String toString() {
+        return "MovieBooking{" +
+                "bookingId=" + bookingId +
+                ", customerId=" + customerId +
+                ", movieId=" + movieId +
+                ", movieHallId=" + movieHallId +
+                '}';
     }
 }
