@@ -1,6 +1,7 @@
 package com.MTIT.Microservices.MovieBookingService.controller;
 
 
+import com.MTIT.Microservices.MovieBookingService.models.Movie;
 import com.MTIT.Microservices.MovieBookingService.models.MovieBooking;
 import com.MTIT.Microservices.MovieBookingService.service.MovieBoookingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,16 @@ public class MovieBookingController {
 
     @Autowired
     private MovieBoookingServiceImpl bookingService;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @RequestMapping("/get/{bookingId}")
+    public String get(@PathVariable Integer bookingId){
+        int movieId = bookingService.getBookedMovieDetails(bookingId).getMovieId();
+        Movie movie = restTemplate.getForObject("http://localhost:8082/api/movie/"+movieId, Movie.class);
+        return movie.toString();
+    }
 
     @PostMapping("/book")
     public String add(@RequestBody MovieBooking movieBooking) {
