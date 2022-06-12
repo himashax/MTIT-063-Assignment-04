@@ -13,13 +13,15 @@ public interface MovieBookingService {
     public void bookMovie(MovieBooking movieBooking);
 
     // Get a particular booking detail
-    public MovieBooking getBookedMovieDetails(Integer movieBookingId);
+    public MovieBooking getBookedMovieDetails(int movieBookingId);
+
+    // Update booking details
+    public String updateBooking(MovieBooking booking, int bookingId);
 
     // Cancel booking
-    public void deleteBooking(Integer movieBookingId);
+    public void deleteBooking(int movieBookingId);
 
     // Check availability of the movie hall
-
-    public boolean bookingAvailability();
+    public boolean bookingAvailability(int hallId, long noOfSeats);
 
 }

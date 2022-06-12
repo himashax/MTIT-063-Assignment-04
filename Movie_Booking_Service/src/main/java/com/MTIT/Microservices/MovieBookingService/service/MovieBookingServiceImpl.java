@@ -1,18 +1,23 @@
 package com.MTIT.Microservices.MovieBookingService.service;
 
+import com.MTIT.Microservices.MovieBookingService.models.Hall;
 import com.MTIT.Microservices.MovieBookingService.models.Movie;
 import com.MTIT.Microservices.MovieBookingService.models.MovieBooking;
 import com.MTIT.Microservices.MovieBookingService.repository.MovieBookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestOperations;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @Service
-public class MovieBoookingServiceImpl implements MovieBookingService {
+public class MovieBookingServiceImpl implements MovieBookingService {
     @Autowired
     private MovieBookingRepository movieBookingRepository;
 
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Override
     public List<MovieBooking> listBookedMovies() {
@@ -27,12 +32,13 @@ public class MovieBoookingServiceImpl implements MovieBookingService {
     }
 
     @Override
-    public MovieBooking getBookedMovieDetails(Integer movieBookingId) {
+    public MovieBooking getBookedMovieDetails(int movieBookingId) {
         // Returns booking details by the booking id
         return movieBookingRepository.findById(movieBookingId).get();
     }
 
-    public String updateBooking(MovieBooking booking, Integer bookingId){
+    @Override
+    public String updateBooking(MovieBooking booking, int bookingId){
         // Get if there is an existing booking details for the requested booking id
         MovieBooking getExistingBooking = getBookedMovieDetails(bookingId);
 
@@ -51,39 +57,36 @@ public class MovieBoookingServiceImpl implements MovieBookingService {
 
 
     @Override
-    public void deleteBooking(Integer movieBookingId) {
+    public void deleteBooking(int movieBookingId) {
         // Delete the booking details by giving the booking id
         movieBookingRepository.deleteById(movieBookingId);
     }
 
     @Override
-    public boolean bookingAvailability() {
+    public boolean bookingAvailability(int hallId, long noOfSeats) {
 
         // Defining a boolean variable for availability of the hall
         boolean available = true;
 
-//        int totalBookedSeats = 0;
-//        for(MovieBooking booking : movieBookingRepository.findAll()){
-//            totalBookedSeats += booking.getNoOfSeats();
-//        }
-//        System.out.println(totalBookedSeats);
-
-//        // Get entering hall id from the user
-//        int hallId;
-//        //get booked seats
-//        int noofseats;
-//        int capacity = template + hallIdid.getcapacity();
-
-        int capacity = 100;
-        int totalBookedSeats = 20;
-        int noofseats = 10;
+        // Get total booked capacity of the hall
+        int totalBookedSeats = 0;
+        for(MovieBooking booking : movieBookingRepository.findAll()){
+            if(booking.getMovieHallId() == hallId){
+                // Sum total number of booked seats to date
+                totalBookedSeats += booking.getNoOfSeats();
+            }
+        }
+        System.out.println(totalBookedSeats);
 
         // Get the hall id requested by the user
-        // Get total capacity of the hall
-        // Sum total number of booked seats to date
-        // Check for availability of seats according to the user request
+        //Hall hall = restTemplate.getForObject("http://localhost:8082/api/movie/"+hallId, Hall.class);
 
-        if(capacity-totalBookedSeats >= noofseats){
+        // Check for availability of seats according to the user request
+        //int hallCapacity = hall.getSeatCapacity();
+
+        int hallCapacity = 200;
+
+        if(hallCapacity - totalBookedSeats >= noOfSeats){
             return available;
         }else{
             return !available;

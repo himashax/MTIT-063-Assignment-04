@@ -3,7 +3,7 @@ package com.MTIT.Microservices.MovieBookingService.controller;
 
 import com.MTIT.Microservices.MovieBookingService.models.Movie;
 import com.MTIT.Microservices.MovieBookingService.models.MovieBooking;
-import com.MTIT.Microservices.MovieBookingService.service.MovieBoookingServiceImpl;
+import com.MTIT.Microservices.MovieBookingService.service.MovieBookingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -16,7 +16,7 @@ import java.util.List;
 public class MovieBookingController {
 
     @Autowired
-    private MovieBoookingServiceImpl bookingService;
+    private MovieBookingServiceImpl bookingService;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -36,7 +36,7 @@ public class MovieBookingController {
 
     // PUT method for updating the booking details
     @PutMapping("/book/{bookingId}")
-    public String update(@RequestBody MovieBooking movieBooking, @PathVariable Integer bookingId) {
+    public String update(@RequestBody MovieBooking movieBooking, @PathVariable int bookingId) {
         // Update and returns the updated movie details
         return bookingService.updateBooking(movieBooking, bookingId);
 
@@ -44,14 +44,14 @@ public class MovieBookingController {
 
     // Delete method for deleting a booking record
     @DeleteMapping("/view/{bookingId}")
-    public String cancelBooking(@PathVariable Integer bookingId){
+    public String cancelBooking(@PathVariable int bookingId){
         bookingService.deleteBooking(bookingId);
         return "Booking " +  bookingId + " Cancelled Successfully";
     }
 
     // View movie details of a booking
     @RequestMapping("/get/{bookingId}")
-    public String get(@PathVariable Integer bookingId){
+    public String get(@PathVariable int bookingId){
         // Get the id of the booked movie
         int movieId = bookingService.getBookedMovieDetails(bookingId).getMovieId();
 
