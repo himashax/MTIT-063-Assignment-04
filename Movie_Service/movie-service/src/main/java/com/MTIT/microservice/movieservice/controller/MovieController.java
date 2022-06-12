@@ -101,12 +101,13 @@ public class MovieController {
    * @return Movie
    */
   @GetMapping("/name/{name}")
-  public ResponseEntity<Movie> getMovieByName(@PathVariable String name) {
-    Movie movie =
+  public ResponseEntity<List<Movie>> getMovieByName(@PathVariable String name) {
+    List<Movie> movies =
         movieRepository
-            .findByMovieTitle(name)
-            .orElseThrow(() -> new ResourceNotFoundException("Movie not found with name: " + name));
+            .findByMovieTitleLike(name)
+            .orElseThrow(
+                () -> new ResourceNotFoundException("Movies not found with name: " + name));
 
-    return ResponseEntity.ok(movie);
+    return ResponseEntity.ok(movies);
   }
 }

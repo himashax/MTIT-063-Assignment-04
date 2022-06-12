@@ -15,14 +15,4 @@ public class MovieServiceApplication {
   }
 
   @Autowired private MovieRepository movieRepository;
-
-  /*	@Override
-  public void run(String... args) throws Exception {
-  	Movie movie = new Movie();
-  	movie.setMovieTitle("SpiderMan");
-  	movie.setMovieType("Marvel");
-  	movie.setYear(2009);
-
-  	movieRepository.save(movie);
-  }*/
 }
