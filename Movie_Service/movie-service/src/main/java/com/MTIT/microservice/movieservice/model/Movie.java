@@ -6,6 +6,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * Movie Model class
+ * Table 'movie'
+ */
 @Getter
 @Setter
 @NoArgsConstructor

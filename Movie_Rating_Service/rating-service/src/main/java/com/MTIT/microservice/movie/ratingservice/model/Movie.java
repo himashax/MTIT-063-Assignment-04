@@ -2,6 +2,10 @@ package com.MTIT.microservice.movie.ratingservice.model;
 
 import lombok.*;
 
+/**
+ * Movie model class
+ * attributes
+ */
 @Getter
 @Setter
 @Builder

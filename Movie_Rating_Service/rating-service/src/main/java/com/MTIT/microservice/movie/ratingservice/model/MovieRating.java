@@ -6,6 +6,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * MovieRating model class
+ * Table = 'movie_rating'
+ */
 @Getter
 @Setter
 @NoArgsConstructor
