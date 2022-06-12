@@ -3,10 +3,11 @@ package com.MTIT.microservice.movie.ratingservice.service;
 import com.MTIT.microservice.movie.ratingservice.model.MovieRating;
 import com.MTIT.microservice.movie.ratingservice.model.MovieRatingDto;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface RatingService {
-    MovieRatingDto getMovieRatingForMovieId(long movieId);
+  List<MovieRatingDto> getMovieRatingForMovieId(long movieId);
 
-    MovieRating save(MovieRating movieRating);
+  MovieRating save(MovieRating movieRating);
 }

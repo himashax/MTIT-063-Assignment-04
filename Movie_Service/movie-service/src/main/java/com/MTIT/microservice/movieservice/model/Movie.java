@@ -13,18 +13,16 @@ import javax.persistence.*;
 @Table(name = "movie")
 public class Movie {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long movieId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long movieId;
 
-    @Column(name = "movieTitle")
-    private String movieTitle;
+  @Column(name = "movieTitle")
+  private String movieTitle;
 
-    @Column(name = "movieType")
-    private String movieType;
+  @Column(name = "movieType")
+  private String movieType;
 
-    @Column(name = "year")
-    private int year;
-
-
+  @Column(name = "year")
+  private int year;
 }
