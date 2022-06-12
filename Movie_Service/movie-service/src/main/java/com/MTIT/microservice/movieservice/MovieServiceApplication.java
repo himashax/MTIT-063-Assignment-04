@@ -1,7 +1,5 @@
 package com.MTIT.microservice.movieservice;
 
-import com.MTIT.microservice.movieservice.repository.MovieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,9 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MovieServiceApplication {
 
+  /**
+   * main class
+   * @param args
+   */
   public static void main(String[] args) {
     SpringApplication.run(MovieServiceApplication.class, args);
   }
-
-  @Autowired private MovieRepository movieRepository;
 }
