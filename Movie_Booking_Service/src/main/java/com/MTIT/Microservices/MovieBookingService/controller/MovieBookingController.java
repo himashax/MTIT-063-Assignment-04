@@ -30,8 +30,13 @@ public class MovieBookingController {
         return bookingService.listBookedMovies();
     }
 
+    @GetMapping("/{bookingId}")
+    public String getBookingDetails(@PathVariable int bookingId){
+        return bookingService.getBookedMovieDetails(bookingId).toString();
+    }
+
     // PUT method for updating the booking details
-    @PutMapping("/{bookingId}")
+    @PutMapping("/book/{bookingId}")
     public String update(@RequestBody MovieBooking movieBooking, @PathVariable int bookingId) {
         // Update and returns the updated movie details
         return bookingService.updateBooking(movieBooking, bookingId);

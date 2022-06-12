@@ -106,14 +106,17 @@ public class MovieBookingServiceImpl implements MovieBookingService {
     @Override
     public String test(){
         long cap=0;
+
+        for(int i=0;i<listBookedMovies().size();i++){
+
+        }
+
         List<Long> caps = new ArrayList<>();
         for(int i=0;i< listBookedMovies().size();i++){
             int mid = listBookedMovies().get(i).getMovieId();
             for(MovieBooking movieBooking:listBookedMovies()){
                 if(mid == movieBooking.getMovieId()){
-                    cap += movieBooking.getNoOfSeats();
-                }else{
-                    break;
+                    cap = movieBooking.getNoOfSeats();
                 }
             }
             caps.add(cap);
