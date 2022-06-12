@@ -10,9 +10,9 @@ import javax.persistence.Column;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MovieRatingDto {
-    private String movieName;
+  private String movieName;
 
-    private int movieRating;
+  private int movieRating;
 
-    private String description;
+  private String description;
 }
