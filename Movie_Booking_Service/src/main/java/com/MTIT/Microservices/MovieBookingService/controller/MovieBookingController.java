@@ -18,9 +18,6 @@ public class MovieBookingController {
     @Autowired
     private MovieBookingServiceImpl bookingService;
 
-    @Autowired
-    private RestTemplate restTemplate;
-
     // POST method for adding new booking details
     @PostMapping("/book")
     public String add(@RequestBody MovieBooking movieBooking) {
@@ -52,12 +49,7 @@ public class MovieBookingController {
     // View movie details of a booking
     @RequestMapping("/get/{bookingId}")
     public String get(@PathVariable int bookingId){
-        // Get the id of the booked movie
-        int movieId = bookingService.getBookedMovieDetails(bookingId).getMovieId();
-
-        // API call to get the particular movie details by the movie id
-        Movie movie = restTemplate.getForObject("http://localhost:8082/api/movie/"+movieId, Movie.class);
-        return movie.toString();
+        return bookingService.getMovieDetails(bookingId).toString();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.MTIT.Microservices.MovieBookingService.service;
 
+import com.MTIT.Microservices.MovieBookingService.models.Movie;
 import com.MTIT.Microservices.MovieBookingService.models.MovieBooking;
 
 import java.util.List;
@@ -23,5 +24,8 @@ public interface MovieBookingService {
 
     // Check availability of the movie hall
     public boolean bookingAvailability(int hallId, long noOfSeats);
+
+    // Get movie details by giving the booking id
+    public Movie getMovieDetails(int bookingId);
 
 }

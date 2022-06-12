@@ -92,4 +92,14 @@ public class MovieBookingServiceImpl implements MovieBookingService {
             return !available;
         }
     }
+
+    @Override
+    public Movie getMovieDetails(int bookingId) {
+        // Get the id of the booked movie
+        int movieId = getBookedMovieDetails(bookingId).getMovieId();
+
+        // API call to get the particular movie details by the movie id
+        Movie movie = restTemplate.getForObject("http://localhost:8082/api/movie/"+movieId, Movie.class);
+        return movie;
+    }
 }
