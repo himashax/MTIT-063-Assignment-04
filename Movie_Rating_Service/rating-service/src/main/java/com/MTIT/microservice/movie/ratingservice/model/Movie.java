@@ -8,12 +8,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Movie {
-    private long movieId;
+  private long movieId;
 
-    private String movieTitle;
+  private String movieTitle;
 
-    private String movieType;
+  private String movieType;
 
-    private int year;
-
+  private int year;
 }
