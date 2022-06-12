@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-  @Query("SELECT m FROM movie m WHERE m.movieTitle LIKE %:title%")
+  @Query("SELECT m FROM Movie m WHERE m.movieTitle LIKE %:title%")
   Optional<List<Movie>> findByMovieTitleLike(@Param("title") String title);
   // all create, read, update, delete methods
 }
