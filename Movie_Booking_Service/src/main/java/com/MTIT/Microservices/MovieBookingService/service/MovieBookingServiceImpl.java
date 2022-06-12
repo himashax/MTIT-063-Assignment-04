@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -54,7 +55,6 @@ public class MovieBookingServiceImpl implements MovieBookingService {
             return "Selected Booking does not exist";
         }
     }
-
 
     @Override
     public void deleteBooking(int movieBookingId) {
@@ -102,4 +102,24 @@ public class MovieBookingServiceImpl implements MovieBookingService {
         Movie movie = restTemplate.getForObject("http://localhost:8082/api/movie/"+movieId, Movie.class);
         return movie;
     }
+
+    @Override
+    public String test(){
+        long cap=0;
+        List<Long> caps = new ArrayList<>();
+        for(int i=0;i< listBookedMovies().size();i++){
+            int mid = listBookedMovies().get(i).getMovieId();
+            for(MovieBooking movieBooking:listBookedMovies()){
+                if(mid == movieBooking.getMovieId()){
+                    cap += movieBooking.getNoOfSeats();
+                }else{
+                    break;
+                }
+            }
+            caps.add(cap);
+        }
+        return ""+caps;
+    }
+
+
 }
