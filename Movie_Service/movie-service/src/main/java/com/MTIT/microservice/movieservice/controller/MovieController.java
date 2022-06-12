@@ -14,93 +14,99 @@ import java.util.List;
 @RequestMapping("/api/movie")
 public class MovieController {
 
-    @Autowired
-    private MovieRepository movieRepository;
+  @Autowired private MovieRepository movieRepository;
 
+  /**
+   * getAllMovieDetails
+   *
+   * @return Movie
+   */
+  @GetMapping
+  public List<Movie> getAllMovieDetails() {
+    return movieRepository.findAll();
+  }
 
-    /**
-     * getAllMovieDetails
-     *
-     * @return Movie
-     */
-    @GetMapping
-    public List<Movie> getAllMovieDetails() {
-        return movieRepository.findAll();
-    }
+  /**
+   * createMovie
+   *
+   * @param movie
+   * @return Movie
+   */
+  @PostMapping
+  public Movie createMovie(@RequestBody Movie movie) {
+    return movieRepository.save(movie);
+  }
 
-    /**
-     * createMovie
-     *
-     * @param movie
-     * @return Movie
-     */
-    @PostMapping
-    public Movie createMovie(@RequestBody Movie movie) {
-        return movieRepository.save(movie);
-    }
+  /**
+   * getMovieById
+   *
+   * @param id
+   * @return Movie
+   */
+  @GetMapping("{id}")
+  public ResponseEntity<Movie> getMovieById(@PathVariable long id) {
+    Movie movie =
+        movieRepository
+            .findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + id));
 
-    /**
-     * getMovieById
-     *
-     * @param id
-     * @return Movie
-     */
-    @GetMapping("{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable long id) {
-        Movie movie = movieRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + id));
+    return ResponseEntity.ok(movie);
+  }
 
-        return ResponseEntity.ok(movie);
-    }
+  /**
+   * updateMovie
+   *
+   * @param id
+   * @param movieDetails
+   * @return Movie
+   */
+  @PutMapping("{id}")
+  public ResponseEntity<Movie> updateMovie(@PathVariable long id, @RequestBody Movie movieDetails) {
+    Movie updateMovie =
+        movieRepository
+            .findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("No movie with the id: " + id));
 
-    /**
-     * updateMovie
-     *
-     * @param id
-     * @param movieDetails
-     * @return Movie
-     */
-    @PutMapping("{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable long id, @RequestBody Movie movieDetails) {
-        Movie updateMovie = movieRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No movie with the id: " + id));
+    updateMovie.setMovieTitle(movieDetails.getMovieTitle());
+    updateMovie.setMovieType(movieDetails.getMovieType());
+    updateMovie.setYear(movieDetails.getYear());
 
-        updateMovie.setMovieTitle(movieDetails.getMovieTitle());
-        updateMovie.setMovieType(movieDetails.getMovieType());
-        updateMovie.setYear(movieDetails.getYear());
+    movieRepository.save(updateMovie);
 
-        movieRepository.save(updateMovie);
+    return ResponseEntity.ok(updateMovie);
+  }
 
-        return ResponseEntity.ok(updateMovie);
-    }
+  /**
+   * deleteMovie
+   *
+   * @param id
+   * @return ResponseEntity<HttpStatus>
+   */
+  @DeleteMapping("{id}")
+  public ResponseEntity<HttpStatus> deleteMovie(@PathVariable long id) {
+    Movie movie =
+        movieRepository
+            .findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Movie not found with the id: " + id));
 
-    /**
-     * deleteMovie
-     *
-     * @param id
-     * @return ResponseEntity<HttpStatus>
-     */
-    @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> deleteMovie(@PathVariable long id) {
-        Movie movie = movieRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Movie not found with the id: " + id));
+    movieRepository.delete(movie);
 
-        movieRepository.delete(movie);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+  /**
+   * getMovieByName
+   *
+   * @param name
+   * @return Movie
+   */
+  @GetMapping("/name/{name}")
+  public ResponseEntity<Movie> getMovieByName(@PathVariable String name) {
+    Movie movie =
+        movieRepository
+            .findByMovieTitle(name)
+            .orElseThrow(() -> new ResourceNotFoundException("Movie not found with name: " + name));
 
-    /**
-     * getMovieByName
-     *
-     * @param name
-     * @return Movie
-     */
-    @GetMapping("/name/{name}")
-    public ResponseEntity<Movie> getMovieByName(@PathVariable String name) {
-        Movie movie = movieRepository.findByMovieTitle(name)
-                .orElseThrow(() -> new ResourceNotFoundException("Movie not found with name: " + name));
-
-        return ResponseEntity.ok(movie);
-    }
+    return ResponseEntity.ok(movie);
+  }
 }
