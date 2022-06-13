@@ -57,9 +57,4 @@ public class MovieBookingController {
         return bookingService.getMovieDetails(bookingId).toString();
     }
 
-    @RequestMapping("/test")
-    public String get(){
-        return bookingService.test();
-    }
-
 }

@@ -27,6 +27,5 @@ public interface MovieBookingService {
 
     // Get movie details by giving the booking id
     public Movie getMovieDetails(int bookingId);
-    public String test();
 
 }
