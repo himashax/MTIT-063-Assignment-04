@@ -23,7 +23,7 @@ public interface MovieBookingService {
     public void deleteBooking(int movieBookingId);
 
     // Check availability of the movie hall
-    public boolean bookingAvailability(int hallId, long noOfSeats);
+    public boolean bookingAvailability(long hallId, long noOfSeats);
 
     // Get movie details by giving the booking id
     public Movie getMovieDetails(int bookingId);

@@ -27,44 +27,84 @@ public class MovieBooking {
         this.noOfSeats = noOfSeats;
     }
 
+    /**
+     *
+     * @return bookingId
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getBookingId() {
         return bookingId;
     }
 
+    /**
+     *
+     * @param bookingId
+     */
     public void setBookingId(int bookingId) {
         this.bookingId = bookingId;
     }
 
+    /**
+     *
+     * @return customerId
+     */
     public int getCustomerId() {
         return customerId;
     }
 
+    /**
+     *
+     * @param customerId
+     */
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
+    /**
+     *
+     * @return movieId
+     */
     public int getMovieId() {
         return movieId;
     }
 
+    /**
+     *
+     * @param movieId
+     */
     public void setMovieId(int movieId) {
         this.movieId = movieId;
     }
 
+    /**
+     *
+     * @return movieHallId
+     */
     public int getMovieHallId() {
         return movieHallId;
     }
 
+    /**
+     *
+     * @param movieHallId
+     */
     public void setMovieHallId(int movieHallId) {
         this.movieHallId = movieHallId;
     }
 
+    /**
+     *
+     * @return noOfSeats
+     */
     public long getNoOfSeats() {
         return noOfSeats;
     }
 
+    /**
+     *
+     * @param noOfSeats
+     */
     public void setNoOfSeats(long noOfSeats) {
         this.noOfSeats = noOfSeats;
     }

@@ -63,7 +63,7 @@ public class MovieBookingServiceImpl implements MovieBookingService {
     }
 
     @Override
-    public boolean bookingAvailability(int hallId, long noOfSeats) {
+    public boolean bookingAvailability(long hallId, long noOfSeats) {
 
         // Defining a boolean variable for availability of the hall
         boolean available = true;
@@ -79,7 +79,7 @@ public class MovieBookingServiceImpl implements MovieBookingService {
         System.out.println(totalBookedSeats);
 
         // Get the hall id requested by the user
-        //Hall hall = restTemplate.getForObject("http://localhost:8082/api/movie/"+hallId, Hall.class);
+        //Hall hall = restTemplate.getForObject("http://localhost:8086/api/v1/halls/"+hallId, Hall.class);
 
         // Check for availability of seats according to the user request
         //int hallCapacity = hall.getSeatCapacity();
@@ -93,6 +93,7 @@ public class MovieBookingServiceImpl implements MovieBookingService {
         }
     }
 
+    // Get movie details from a booking entry
     @Override
     public Movie getMovieDetails(int bookingId) {
         // Get the id of the booked movie

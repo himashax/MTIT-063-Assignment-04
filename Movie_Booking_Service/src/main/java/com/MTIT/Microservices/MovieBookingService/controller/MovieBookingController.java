@@ -30,6 +30,7 @@ public class MovieBookingController {
         return bookingService.listBookedMovies();
     }
 
+    // Get method view details a particular booking
     @GetMapping("/{bookingId}")
     public String getBookingDetails(@PathVariable int bookingId){
         return bookingService.getBookedMovieDetails(bookingId).toString();
@@ -51,7 +52,7 @@ public class MovieBookingController {
     }
 
     // View movie details of a booking
-    @RequestMapping("/book/{bookingId}")
+    @RequestMapping("/movie/{bookingId}")
     public String get(@PathVariable int bookingId){
         return bookingService.getMovieDetails(bookingId).toString();
     }
