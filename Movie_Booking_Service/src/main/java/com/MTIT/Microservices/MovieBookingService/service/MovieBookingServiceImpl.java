@@ -76,15 +76,12 @@ public class MovieBookingServiceImpl implements MovieBookingService {
                 totalBookedSeats += booking.getNoOfSeats();
             }
         }
-        System.out.println(totalBookedSeats);
 
         // Get the hall id requested by the user
-        //Hall hall = restTemplate.getForObject("http://localhost:8086/api/v1/halls/"+hallId, Hall.class);
+        Hall hall = restTemplate.getForObject("http://localhost:8086/api/halls/"+hallId, Hall.class);
 
         // Check for availability of seats according to the user request
-        //int hallCapacity = hall.getSeatCapacity();
-
-        int hallCapacity = 200;
+        int hallCapacity = hall.getSeatCapacity();
 
         if(hallCapacity - totalBookedSeats >= noOfSeats){
             return available;

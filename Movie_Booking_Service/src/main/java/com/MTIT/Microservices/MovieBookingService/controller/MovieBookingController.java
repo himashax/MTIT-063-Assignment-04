@@ -20,8 +20,15 @@ public class MovieBookingController {
     // POST method for adding new booking details
     @PostMapping("/book")
     public String add(@RequestBody MovieBooking movieBooking) {
-        bookingService.bookMovie(movieBooking);
-        return movieBooking.toString();
+
+        // Check availability of seats
+        if(bookingService.bookingAvailability(movieBooking.getMovieHallId(), movieBooking.getNoOfSeats())){
+            // Add booking if available
+            bookingService.bookMovie(movieBooking);
+            return movieBooking.toString();
+        }else{
+            return "Unavailable";
+        }
     }
 
     // GET method to view all the booking details
