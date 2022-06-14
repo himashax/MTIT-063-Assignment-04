@@ -1,6 +1,7 @@
 package com.demo.moviecatalogservice.service;
 
 import com.demo.moviecatalogservice.models.Movie;
+import com.demo.moviecatalogservice.models.MovieRatingClass;
 
 import java.util.List;
 
@@ -14,6 +15,9 @@ public interface MovieCatalogService {
 
     // Get details of a particular movie
     public Movie getMovieDetails(int movieId);
+
+    // Get movie ratings
+    public List<MovieRatingClass> getRatings(long movieId);
 
 
 }

@@ -1,6 +1,7 @@
 package com.demo.moviecatalogservice.resources;
 
 import com.demo.moviecatalogservice.models.Movie;
+import com.demo.moviecatalogservice.models.MovieRatingClass;
 import com.demo.moviecatalogservice.service.MovieCatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +25,11 @@ public class MovieCatalogResource {
     @RequestMapping("/mostwatched")
     public Movie mostViewedMovies(){
         return movieCatalogService.getMostWatchedMovie();
+    }
+
+    // get the movie ratings
+    @RequestMapping("/ratings/{movieId}")
+    public List<MovieRatingClass> getMovieRatings(long movieId){
+        return movieCatalogService.getRatings(movieId);
     }
 }

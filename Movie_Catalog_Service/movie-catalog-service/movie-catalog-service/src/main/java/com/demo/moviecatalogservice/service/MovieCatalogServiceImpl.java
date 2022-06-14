@@ -2,6 +2,7 @@ package com.demo.moviecatalogservice.service;
 
 import com.demo.moviecatalogservice.models.Movie;
 import com.demo.moviecatalogservice.models.MovieBooking;
+import com.demo.moviecatalogservice.models.MovieRatingClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,33 @@ public class MovieCatalogServiceImpl implements MovieCatalogService{
     @Override
     public Movie getMostWatchedMovie(){
 
+        HashMap<Integer, Integer> hashMap = getTotalBookedSeats();
+
+        int id=0;
+        int maxValue = Collections.max(hashMap.values());
+
+        // Get the movie id with maximum no of booked seats
+        for (Map.Entry<Integer, Integer> entry : hashMap.entrySet()) {
+            if (entry.getValue()==maxValue) {
+                id = entry.getKey();
+            }
+        }
+
+        // Returns the movie id
+        return getMovieDetails(id);
+    }
+
+    public List<MovieBooking> getMovieBookings(){
         // API call to Movie Booking Service to get all the movie bookings
         ResponseEntity<MovieBooking[]> responseEntity = restTemplate.getForEntity("http://localhost:8081/bookings", MovieBooking[].class);
         MovieBooking[] bookings = responseEntity.getBody();
         List<MovieBooking> movieBookings = Arrays.stream(bookings).collect(Collectors.toList());
+        return movieBookings;
+    }
+
+    public HashMap<Integer,Integer> getTotalBookedSeats(){
+
+        List<MovieBooking> movieBookings = getMovieBookings();
 
         HashMap<Integer, Integer> hashMap = new HashMap<>();
         int movieId = 0;
@@ -41,23 +65,11 @@ public class MovieCatalogServiceImpl implements MovieCatalogService{
                     total += movieBookings.get(i).getNoOfSeats();
                 }
             }
-
             // Store movie id and booked seats
             hashMap.put(movieId, (int) total);
         }
 
-        int id=0;
-        int maxValue = Collections.max(hashMap.values());
-
-        // Get the movie id with maximum no of booked seats
-        for (Map.Entry<Integer, Integer> entry : hashMap.entrySet()) {
-            if (entry.getValue()==maxValue) {
-                id = entry.getKey();
-            }
-        }
-
-        // Returns the movie id
-        return getMovieDetails(id);
+        return hashMap;
     }
 
     @Override
@@ -76,7 +88,13 @@ public class MovieCatalogServiceImpl implements MovieCatalogService{
         return movie;
     }
 
-
-
+    @Override
+    public List<MovieRatingClass> getRatings(long movieId) {
+        // API call to get movie ratings
+        ResponseEntity<MovieRatingClass[]> responseEntity = restTemplate.getForEntity("http://localhost:8084/api/rating/movie/"+movieId, MovieRatingClass[].class);
+        MovieRatingClass[] movieRating = responseEntity.getBody();
+        List<MovieRatingClass> ratings = Arrays.stream(movieRating).collect(Collectors.toList());
+        return  ratings;
+    }
 
 }
